@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Untuk Aya Cantik</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(to bottom right, #ffd6e8, #ffe6f0);
+        /* overflow-x: hidden;
+        overflow: hidden; */
+      }
+
+      header {
+        position: sticky;
+        top: 10px;
+        background: rgba(255, 240, 245, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        border-radius: 0 0 30px 30px;
+        box-shadow: 0 8px 20px rgba(255, 105, 180, 0.15);
+        z-index: 100;
+        animation: headerSlideDown 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      .logo {
+        font-weight: bold;
+        font-size: 28px;
+        color: #ff69b4;
+        text-shadow: 0 0 6px #ffc0cb;
+        animation: glowPulse 3s infinite alternate;
+        letter-spacing: 1px;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #d63384;
+        font-weight: 600;
+        font-size: 16px;
+        padding: 8px 16px;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+      }
+
+      nav a:hover {
+        background-color: #ffdef0;
+        color: #ff1493;
+        box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+      }
+
+      .hero {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 40px;
+        flex-wrap: wrap;
+        animation: fadeInSmooth 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        will-change: transform, opacity;
+      }
+
+      .text-content {
+        max-width: 600px;
+        text-align: left;
+        flex: 1;
+      }
+
+      .text-content h1 {
+        font-size: 2.5rem;
+        color: #ff69b4;
+        margin-bottom: 20px;
+        animation: glowPulse 4s infinite alternate;
+      }
+
+      .text-content p {
+        font-size: 20px;
+        background: rgba(255, 240, 245, 0.9);
+        padding: 30px;
+        border-radius: 30px;
+        box-shadow: 0 12px 30px rgba(255, 105, 180, 0.3);
+        animation: slideUpFadeSmooth 1.8s ease-out 1s forwards;
+        line-height: 1.8;
+        opacity: 0;
+        text-align: justify;
+        will-change: transform, opacity;
+      }
+
+      .image-content {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .heart-img {
+        width: 480px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        clip-path: url(#heartClip);
+        box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+        animation: bounceInSmooth 2.5s ease-in-out infinite;
+        transition: transform 0.3s ease;
+        will-change: transform;
+      }
+
+      .image-content img:hover {
+        transform: scale(1.05) rotate(2deg);
+      }
+
+      .hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      .heart {
+        position: absolute;
+        font-size: 24px;
+        color: #ff69b4;
+        animation: floatHeartsSmooth 10s linear infinite;
+        opacity: 0.7;
+        will-change: transform, opacity;
+      }
+
+      footer {
+        background-color: #fff0f5;
+        text-align: center;
+        padding: 2px;
+        font-size: 16px;
+        color: #d63384;
+        box-shadow: 0 -2px 10px rgba(255, 105, 180, 0.2);
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 10;
+      }
+
+      /* ✨ Keyframes */
+      @keyframes fadeInSmooth {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideUpFadeSmooth {
+        0% {
+          transform: translateY(60px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes bounceInSmooth {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes floatHeartsSmooth {
+        0% {
+          transform: translateY(100vh) scale(0.8);
+          opacity: 0.3;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(-10vh) scale(1.4);
+          opacity: 0;
+        }
+      }
+
+      @keyframes glowPulse {
+        0% {
+          text-shadow: 0 0 5px #ff69b4, 0 0 10px #ffc0cb;
+        }
+        100% {
+          text-shadow: 0 0 10px #ff69b4, 0 0 20px #ffc0cb;
+        }
+      }
+
+      @keyframes headerSlideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulseHeart {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          flex-direction: column;
+          padding: 20px;
+        }
+
+        .text-content {
+          text-align: center;
+        }
+
+        .text-content h1 {
+          font-size: 2rem;
+        }
+
+        .text-content p {
+          font-size: 16px;
+        }
+      }
+    </style>
+    <style>
+      #pesan,
+      #pantun {
+        padding-top: 100px;
+      }
+
+      .hero {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 50px 20px;
+        gap: 50px;
+      }
+
+      .text-content,
+      .image-content {
+        flex: 1 1 45%;
+      }
+
+      .heart-img {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+    </style>
+    <style>
+      .corner-ribbon {
+        position: absolute;
+        width: 160px;
+        padding: 12px 0;
+        background: linear-gradient(145deg, #ff6fb5, #ff2e93);
+        color: #fff;
+        text-align: center;
+        font-weight: 700;
+        font-size: 14px;
+        font-family: "Segoe UI", sans-serif;
+        box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4),
+          inset 0 -3px 6px rgba(0, 0, 0, 0.1),
+          inset 0 3px 6px rgba(255, 255, 255, 0.3);
+        clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+        z-index: 1000;
+        letter-spacing: 0.5px;
+        animation: glowRibbon 2s ease-in-out infinite alternate;
+      }
+
+      /* Animasi glow lembut */
+      @keyframes glowRibbon {
+        0% {
+          filter: drop-shadow(0 0 4px #ff99cc);
+        }
+        100% {
+          filter: drop-shadow(0 0 10px #ff66b2);
+        }
+      }
+
+      /* Ekornya */
+      .corner-ribbon::after {
+        content: "";
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-top: 12px solid #ff2e93;
+      }
+
+      /* Pita Kiri */
+      .corner-ribbon.left {
+        top: -10px;
+        left: -45px;
+        transform: rotate(-45deg);
+      }
+
+      /* Pita Kanan */
+      .corner-ribbon.right {
+        top: -10px;
+        right: -45px;
+        transform: rotate(45deg);
+      }
+    </style>
+    <style>
+      @media (max-width: 768px) {
+        body {
+          padding-top: 110px; /* Untuk header */
+          padding-bottom: 70px; /* Untuk footer */
+        }
+
+        header {
+          position: fixed;
+          top: 0;
+          width: 100%;
+          z-index: 1000;
+          border-radius: 0 0 20px 20px;
+        }
+
+        footer {
+          position: fixed;
+          bottom: 0;
+          width: 100%;
+          z-index: 1000;
+          font-size: 14px;
+          padding: 10px 12px;
+          background-color: #fff0f5;
+          box-shadow: 0 -2px 10px rgba(255, 105, 180, 0.2);
+        }
+
+        .hero {
+          margin-top: 30px;
+          margin-bottom: 100px; /* cukup tinggi agar tidak tertutup footer */
+          padding: 20px 16px;
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .text-content {
+          text-align: center;
+        }
+
+        .text-content h1 {
+          font-size: 1.8rem;
+        }
+
+        .text-content p {
+          font-size: 16px;
+          padding: 20px;
+        }
+
+        .heart-img {
+          max-width: 90%;
+        }
+
+        nav {
+          justify-content: center;
+          width: 100%;
+          margin-top: 10px;
+        }
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const mainContent = document.getElementById("mainContent");
+        mainContent.style.minHeight = `${window.innerHeight}px`;
+      });
+    </script>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://em-content.zobj.net/thumbs/160/apple/354/sparkling-heart_1f496.png"
+    />
+    <script>
+      function handleOverflow() {
+        const isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+          document.body.style.overflow = "auto";
+          document.body.style.overflowX = "auto";
+        } else {
+          document.body.style.overflow = "hidden";
+          document.body.style.overflowX = "hidden";
+        }
+      }
+
+      // Jalankan saat halaman load
+      window.addEventListener("load", handleOverflow);
+
+      // Jalankan juga saat resize, misalnya user ubah ukuran layar
+      window.addEventListener("resize", handleOverflow);
+    </script>
+  </head>
+
+  <svg width="0" height="0">
+    <defs>
+      <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+        <path
+          d="M0.5,0.3
+                 C0.5,0.1, 0.9,0, 1,0.3
+                 C1.1,0.6, 0.5,1, 0.5,1
+                 C0.5,1, -0.1,0.6, 0,0.3
+                 C0.1,0, 0.5,0.1, 0.5,0.3Z"
+        />
+      </clipPath>
+    </defs>
+  </svg>
+
+  <body>
+    <div
+      id="audioPrompt"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(255, 240, 245, 0.95);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        font-family: 'Segoe UI', sans-serif;
+        text-align: center;
+      "
+    >
+      <h2
+        style="
+          color: #d63384;
+          margin-bottom: 20px;
+          font-size: 26px;
+          padding: 20px 30px;
+          background: rgba(255, 240, 250, 0.7);
+          border: 2px dashed #ff69b4;
+          border-radius: 20px;
+          box-shadow: 0 4px 12px rgba(255, 105, 180, 0.2);
+          max-width: 300px;
+          line-height: 1.4;
+        "
+      >
+        Hai Aya Sayang<br />
+        <span style="font-size: 18px">Klik hati untuk mulai yaa cantik :)</span>
+      </h2>
+
+      <!-- Tombol hati utama -->
+      <button
+        id="unlockAudioBtn"
+        style="
+          font-size: 48px;
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          animation: pulseHeart 1.5s infinite;
+        "
+        title="Klik untuk mulai"
+      >
+        ❤️
+      </button>
+    </div>
+
+    <audio id="bgm" loop preload="none">
+      <source src="song.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div id="mainContent" style="display: none">
+      <header>
+        <div class="corner-ribbon left">💝 Untuk Aya</div>
+        <div class="corner-ribbon right">Spesial 💖</div>
+
+        <div class="logo">💗 I Love You Aya</div>
+        <nav>
+          <a href="#beranda">Beranda</a>
+          <a href="#pesan">Pesan</a>
+          <a href="#pantun">Pantun</a>
+        </nav>
+      </header>
+
+      <section id="beranda" class="hero">
+        <div style="padding-top: 20px" class="text-content">
+          <h1 id="heading"></h1>
+          <p style="line-height: 1.8; font-size: 18px; text-align: justify">
+            Halaman ini dibuat khusus untuk kamu, Aya sayang. Semoga hari
+            lebaran kali ini membawa banyak kebahagiaan dan keberkahan dalam
+            hidup kamu. Aku selalu berdoa yang terbaik untukmu.
+          </p>
+        </div>
+        <div class="image-content">
+          <img src="aya2.jpg" alt="Aya Beranda" class="heart-img" />
+        </div>
+      </section>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <section id="pesan" class="hero">
+        <div class="text-content">
+          <br /><br />
+          <h1>Selamat Idul Fitri, Aya</h1>
+          <p style="line-height: 1.8; font-size: 18px; text-align: justify">
+            Hai Aya, wanita paling cantik yang selalu buat aku pusing karena
+            sikapmu 😊<br /><br />
+            Di momen Idul Fitri ini, aku gak cuma minta maaf atas semua
+            kesalahan dan khilafku. Aku juga ingin bilang terima kasih karena
+            kamu sudah menjadi alasan aku bangun pagi dengan semangat dan tidur
+            malam dengan perasaan bahagia.<br /><br />
+            Tetap semangat ya sayangku yang lagi berjuang dengan skripsinya.
+            Kamu pasti bisa 💕<br /><br />
+            Aku di sini akan selalu jadi pendukung setia kamu, yang akan terus
+            bilang, "Aku bangga banget sama kamu, Aya." 🥰✨
+          </p>
+        </div>
+        <div class="image-content">
+          <img src="aya1.png" alt="Foto Cinta" class="heart-img" />
+        </div>
+      </section>
+
+      <section id="pantun" class="hero">
+        <div class="text-content">
+          <br /><br />
+          <h1>Pantun Buat Aya</h1>
+          <p style="text-align: justify; line-height: 1.8; font-size: 16px">
+            <span
+              style="
+                color: #ff69b4;
+                font-weight: bold;
+                display: inline-block;
+                margin-bottom: 5px;
+              "
+              >Pantun 1</span
+            ><br />
+            Jalan-jalan ke Kota Padang,<br />
+            Jangan lupa beli mangga.<br />
+            Hati ini semakin sayang,<br />
+            Tiap lihat senyuman Aya. 😊<br /><br />
+
+            <span
+              style="
+                color: #ff69b4;
+                font-weight: bold;
+                display: inline-block;
+                margin-bottom: 5px;
+              "
+              >Pantun 2</span
+            ><br />
+            Beli ketupat di Pasar Minggu,<br />
+            Ketupat disantap bersama jamu.<br />
+            Selamat Lebaran, cinta hatiku,<br />
+            Cuma Aya yang nomor satu. 🥰<br /><br />
+
+            <span
+              style="
+                color: #ff69b4;
+                font-weight: bold;
+                display: inline-block;
+                margin-bottom: 5px;
+              "
+              >Pantun 3</span
+            ><br />
+            Dari Sumatera ke Kalimantan,<br />
+            Bawa pulang buah durian.<br />
+            Tak akan lelah aku katakan,<br />
+            Aya selalu dalam pikiran. 💖
+          </p>
+        </div>
+        <div class="image-content">
+          <img src="aya3.jpeg" alt="Pantun Romantis" class="heart-img" />
+        </div>
+      </section>
+
+      <div class="hearts"></div>
+
+      <footer>
+        <p id="footerText"></p>
+      </footer>
+
+      <canvas
+        id="stars"
+        style="position: fixed; top: 0; left: 0; z-index: -2"
+      ></canvas>
+    </div>
+    <script>
+      function scrollToCenter(element) {
+        const rect = element.getBoundingClientRect();
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const elementTop = rect.top + scrollTop;
+        const offset = window.innerHeight / 2 - rect.height / 2;
+
+        const adjustOffset = -40; // 🔧 GESER KE ATAS SEDIKIT
+
+        window.scrollTo({
+          top: elementTop - offset - adjustOffset,
+          behavior: "smooth",
+        });
+      }
+
+      function showSectionAndScroll(targetId) {
+        const target = document.getElementById(targetId);
+        scrollToCenter(target);
+      }
+
+      document.querySelectorAll("nav a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href").substring(1);
+
+          // Langsung scroll ke section
+          setTimeout(() => {
+            showSectionAndScroll(targetId);
+          }, 200);
+        });
+      });
+
+      document.querySelector("header").addEventListener("click", () => {
+        showSectionAndScroll("beranda");
+      });
+    </script>
+
+    <script>
+      const bgm = document.getElementById("bgm");
+      const unlockBtn = document.getElementById("unlockAudioBtn");
+      const audioPrompt = document.getElementById("audioPrompt");
+      const headingText = "Selamat Datang Aya Cantik💖";
+      const headingElement = document.getElementById("heading");
+      const footerElement = document.getElementById("footerText");
+
+      let charIndex = 0;
+      let index = 0;
+      let stars = [];
+
+      function typeHeading() {
+        if (charIndex < headingText.length) {
+          headingElement.innerHTML += headingText.charAt(charIndex);
+          charIndex++;
+          setTimeout(typeHeading, 110);
+        }
+      }
+
+      function typeFooter() {
+        footerElement.innerHTML = "";
+        index = 0;
+        typeChar();
+      }
+
+      function typeChar() {
+        const textBeforeBold = "Created with 💕 by ";
+        const boldText = "@tahirwiyann";
+        if (index < textBeforeBold.length) {
+          footerElement.innerHTML += textBeforeBold.charAt(index);
+          index++;
+          setTimeout(typeChar, 80);
+        } else if (index < textBeforeBold.length + boldText.length) {
+          const boldPart = document.createElement("strong");
+          boldPart.textContent = boldText.substring(
+            0,
+            index - textBeforeBold.length + 1
+          );
+          footerElement.innerHTML = textBeforeBold + boldPart.outerHTML;
+          index++;
+          setTimeout(typeChar, 100);
+        } else {
+          setTimeout(typeFooter, 3000);
+        }
+      }
+
+      function initStars() {
+        const canvas = document.getElementById("stars");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        stars = Array.from({ length: 100 }, () => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5,
+          alpha: Math.random(),
+          delta: Math.random() * 0.02,
+        }));
+
+        function drawStars() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          for (let star of stars) {
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+            ctx.fill();
+            star.alpha += star.delta;
+            if (star.alpha <= 0 || star.alpha >= 1) star.delta *= -1;
+          }
+          requestAnimationFrame(drawStars);
+        }
+
+        drawStars();
+      }
+
+      unlockBtn.addEventListener("click", function () {
+        bgm.play().then(() => {
+          audioPrompt.style.display = "none";
+          document.getElementById("mainContent").style.display = "block";
+          typeHeading();
+          typeFooter();
+          initStars();
+
+          for (let i = 0; i < 30; i++) {
+            const heart = document.createElement("div");
+            heart.className = "heart";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = 5 + Math.random() * 5 + "s";
+            heart.style.fontSize = 16 + Math.random() * 30 + "px";
+            heart.innerHTML = "💖";
+            document.body.querySelector(".hearts").appendChild(heart);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
