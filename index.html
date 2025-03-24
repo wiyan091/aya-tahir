@@ -255,33 +255,6 @@
       }
     </style>
     <style>
-      #pesan,
-      #pantun {
-        padding-top: 100px;
-      }
-
-      .hero {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        align-items: center;
-        padding: 50px 20px;
-        gap: 50px;
-      }
-
-      .text-content,
-      .image-content {
-        flex: 1 1 45%;
-      }
-
-      .heart-img {
-        width: 100%;
-        max-width: 400px;
-        border-radius: 15px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      }
-    </style>
-    <style>
       .corner-ribbon {
         position: absolute;
         width: 160px;
@@ -395,6 +368,13 @@
           width: 100%;
           margin-top: 10px;
         }
+      }
+      section.hero {
+        display: none;
+      }
+
+      section.hero.active {
+        display: flex;
       }
     </style>
     <script>
@@ -513,7 +493,7 @@
         </nav>
       </header>
 
-      <section id="beranda" class="hero">
+      <section style="margin-top: -30px" id="beranda" class="hero">
         <div style="padding-top: 20px" class="text-content">
           <h1 id="heading"></h1>
           <p style="line-height: 1.8; font-size: 18px; text-align: justify">
@@ -526,9 +506,7 @@
           <img src="aya2.jpg" alt="Aya Beranda" class="heart-img" />
         </div>
       </section>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <section id="pesan" class="hero">
+      <section style="margin-top: -70px" id="pesan" class="hero">
         <div class="text-content">
           <br /><br />
           <h1>Selamat Idul Fitri, Aya</h1>
@@ -550,11 +528,11 @@
         </div>
       </section>
 
-      <section id="pantun" class="hero">
+      <section style="margin-top: -90px" id="pantun" class="hero">
         <div class="text-content">
           <br /><br />
           <h1>Pantun Buat Aya</h1>
-          <p style="text-align: justify; line-height: 1.8; font-size: 16px">
+          <p style="text-align: justify; line-height: 1.8; font-size: 14px">
             <span
               style="
                 color: #ff69b4;
@@ -614,42 +592,57 @@
         style="position: fixed; top: 0; left: 0; z-index: -2"
       ></canvas>
     </div>
-    <script>
-      function scrollToCenter(element) {
-        const rect = element.getBoundingClientRect();
-        const scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop;
-        const elementTop = rect.top + scrollTop;
-        const offset = window.innerHeight / 2 - rect.height / 2;
 
-        const adjustOffset = -40; // 🔧 GESER KE ATAS SEDIKIT
-
-        window.scrollTo({
-          top: elementTop - offset - adjustOffset,
-          behavior: "smooth",
-        });
+    <style>
+      .floating-text {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 20px;
+        font-weight: bold;
+        color: #ff69b4;
+        animation: floatUpText 6s linear forwards;
+        opacity: 0.8;
+        z-index: 2;
+        pointer-events: none;
+        white-space: nowrap;
       }
 
-      function showSectionAndScroll(targetId) {
-        const target = document.getElementById(targetId);
-        scrollToCenter(target);
+      @keyframes floatUpText {
+        0% {
+          transform: translateX(-50%) translateY(100vh);
+          opacity: 0;
+        }
+        30% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(-50%) translateY(-100px);
+          opacity: 0;
+        }
+      }
+    </style>
+    <script>
+      function showSection(targetId) {
+        document.querySelectorAll("section.hero").forEach((section) => {
+          if (section.id === targetId) {
+            section.classList.add("active");
+          } else {
+            section.classList.remove("active");
+          }
+        });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
       document.querySelectorAll("nav a").forEach((link) => {
         link.addEventListener("click", function (e) {
           e.preventDefault();
           const targetId = this.getAttribute("href").substring(1);
-
-          // Langsung scroll ke section
-          setTimeout(() => {
-            showSectionAndScroll(targetId);
-          }, 200);
+          showSection(targetId);
         });
       });
-
-      document.querySelector("header").addEventListener("click", () => {
-        showSectionAndScroll("beranda");
-      });
+      showSection("beranda");
     </script>
 
     <script>
@@ -679,8 +672,8 @@
       }
 
       function typeChar() {
-        const textBeforeBold = "Created by 💕 ";
-        const boldText = "@tahirwiyann";
+        const textBeforeBold = "Created by ";
+        const boldText = "@tahirwiyann 💕";
         if (index < textBeforeBold.length) {
           footerElement.innerHTML += textBeforeBold.charAt(index);
           index++;
