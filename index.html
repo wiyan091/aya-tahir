@@ -388,36 +388,26 @@
       type="image/png"
       href="https://em-content.zobj.net/thumbs/160/apple/354/sparkling-heart_1f496.png"
     />
-    <style>
-  body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;     /* Firefox */
-  }
-
-  body::-webkit-scrollbar {
-    display: none;             /* Chrome, Safari, Opera */
-  }
-    </style>
     <script>
-  function handleOverflow() {
-    const isMobile = window.innerWidth <= 768;
+      function handleOverflow() {
+        const isMobile = window.innerWidth <= 768;
 
-    if (isMobile) {
-      // Di mobile: biarkan scroll penuh (horizontal dan vertikal)
-      document.body.style.overflow = "auto";
-      document.body.style.overflowX = "auto";
-    } else {
-      // Di desktop: scroll vertikal boleh, horizontal disembunyikan
-      document.body.style.overflow = "auto";
-      document.body.style.overflowX = "hidden";
-    }
-  }
+        if (isMobile) {
+          document.body.style.overflow = "auto";
+          document.body.style.overflowX = "auto";
+        } else {
+          document.body.style.overflow = "auto";
+          //document.body.style.overflowX = "auto";
+          //document.body.style.overflow = "hidden";
+          document.body.style.overflowX = "hidden";
+        }
+      }
 
-  // Jalankan saat halaman load
-  window.addEventListener("load", handleOverflow);
+      // Jalankan saat halaman load
+      window.addEventListener("load", handleOverflow);
 
-  // Jalankan juga saat resize layar
-  window.addEventListener("resize", handleOverflow);
+      // Jalankan juga saat resize, misalnya user ubah ukuran layar
+      window.addEventListener("resize", handleOverflow);
     </script>
   </head>
 
